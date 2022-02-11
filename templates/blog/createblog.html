@@ -1,0 +1,40 @@
+ {% extends 'home/base.html' %}
+ 
+ {% block content %}
+ <div class="container mt-4" >
+           <div class="container rounded p-4 shadow">
+            <div class="btns ml-2">
+              <i class="fa fa-circle  text-iosred" aria-hidden="true"></i>
+              <i class="fa fa-circle text-iosyellow" aria-hidden="true"></i>
+              <i class="fa fa-circle text-iossuccess" aria-hidden="true"></i>
+          </div>
+            <h2 class="text-iossuccess">Blog Post</h2>   
+            <!--<form class="ios-form mt-4" action="{% url 'blog_created' %}" method="POST">-->
+              
+              <form method="post" class=" mt-4 blogform" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.media }} 
+                {{ form.as_p }}
+                <button class="btnios-na ios-pr">Post</button>
+            </form>
+            <!--<div class="form-group">
+            <input type="text" class="ios-control  p-2" name="title" placeholder="Title max(50)">
+           </div>
+           <div class="form-group">
+            <input type="text" class="ios-control  p-2" name="brief" placeholder="Breif max(50)">
+           </div>
+           <div class="form-group">
+            <textarea class="ios-control-textarea" name="content" cols="95" rows="10"></textarea>
+            
+           </div>
+           <button class="btnios-na ios-pr-red">Draft</button>-->
+           
+           </form>
+          </div>
+   </div>
+    <br>
+    <div class="darkmode  overflow-hidden" id="dark" style="z-index: 1800;" title="Dark mode">
+      <b><i class="fa fa-moon-o" aria-hidden="true"></i></b>
+    <b><i class="fa fa-sun-o" aria-hidden="true"></i></b>
+    </div>
+{% endblock content %}
