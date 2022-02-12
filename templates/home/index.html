@@ -25,7 +25,7 @@
                     <div class="mt-3">
                         
                         <div class="blog-info-details">
-                            <a href="/{{blog.slug}}/">
+                            <a href="blog/{{blog.slug}}/">
                             <span class="text-small text-iosgray">{{blog.blog_creator}}</span>
                             <h4 class="font-weight-bold text-iosdark blog-text">{{blog.blog_title}}</h4>
                             <span class="text-small text-iosgray">{{blog.date}}</span>
@@ -54,7 +54,7 @@
                 {% for blog in blogs %}
                 
                 <div class="blog-info-det-main bg-ioswhite p-2 rounded-lg">
-                    <a href="/{{blog.slug}}/" class="text-iosdark">
+                    <a href="blog/{{blog.slug}}/" class="text-iosdark">
                     <div class="flex-box ">
                         <h2 class="text-iosgray mr-2">{{ forloop.counter }}</h2>
                         <div>

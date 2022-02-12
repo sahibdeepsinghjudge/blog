@@ -5,12 +5,12 @@
       <i class="fa fa-bars"></i>
     </label>
   <ul class="menu">
-    <li><a class="home" href="/">Home</a></li>
+    <li><a class="home text-iosdark" href="/">Home</a></li>
     {% if request.user.is_staff %}
-    <li><a class="services" href="">Dashboard</a></li>
-    <li><a class="logout" href="">{{request.user.username}}</a></li>
+    <li><a class="services text-iosdark" href="">Dashboard</a></li>
+    <li><a class="logout text-iosdark" href="">{{request.user.username}}</a></li>
     {% else %}
-    <li><a class="login" href="">Login</a></li>
+    <li><a class="login text-iosdark"  href="/login/">Login</a></li>
     {% endif %}
   </ul>
 </nav>
