@@ -53,7 +53,7 @@ luxury business cards,
 b letter design,
 baby portraits"
     />
-    <title>{{title}}|Paradise Creations</title>
+    <title>{{title}}|keyDown</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
@@ -88,9 +88,9 @@ baby portraits"
   </head>
   <body>
     {% include 'home/navi.html' %} {% include 'home/darkmode.html' %}
-    <div class="container mt-4">
+    <div class="blog-body mt-4">
       {% if messages %} {% for message in messages %}
-      <div class="alert  alert-{{ message.tags }}" id="msg">{{message}}</div>
+      <div class="alert  alert-{{ message.tags }} shadow-{{ message.tags }} " id="msg">{{message}}</div>
       {% endfor %} {% endif %}
     </div>
 

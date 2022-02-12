@@ -278,9 +278,9 @@ body {
   background: #f2f2f7;
   padding: 5px;
   width: 800px;
-  
+  outline: none;
   border-radius: 10px;
-  height: 50px;
+  height: 40px;
   border: 1px rgb(209, 209, 214);
   font-weight: 500;
 }
@@ -526,11 +526,10 @@ label.logo {
   padding: 7px 13px;
   border-radius: 3px;
   border-radius: 20px;
-  text-transform: uppercase;
+
 }
 .navi ul li a:hover{
-  color: #f2f2f7;
-  background: #0a84ff;
+  font-weight: 600;
   border-radius: 20px;
   transition: 0.5s;
 }

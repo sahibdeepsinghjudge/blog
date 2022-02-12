@@ -41,7 +41,7 @@ def blog_details(request,slug):
         return render(request,'blog/blog.html',context)
     else:
         messages.info(request,"Requested blog not found!")
-        return redirect('/blog/')
+        return redirect('/')
 
 def create_blog_page(request):
     context = {

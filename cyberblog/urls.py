@@ -19,13 +19,13 @@ from django.urls import path
 from django.urls.conf import include
 from django.conf import settings
 from django.conf.urls.static import static
-#from home.views import new_login
+from users.views import login_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('users/', include('users.urls')),
     path('', include('home.urls')),
-    path('/users/', include('users.urls')),
-    #path('login/',new_login,name="login"),
+    path('login/',login_page,name="login"),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 if settings.DEBUG:
