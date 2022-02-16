@@ -17,16 +17,19 @@ from os import name
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
+from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
-from users.views import login_page
+from users.views import login_page,register_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
     path('', include('home.urls')),
     path('login/',login_page,name="login"),
+     path('register/',register_page,name="register"),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

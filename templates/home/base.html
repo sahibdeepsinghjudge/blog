@@ -53,7 +53,9 @@ luxury business cards,
 b letter design,
 baby portraits"
     />
-    <title>{{title}}|keyDown</title>
+    <title>
+      {% if title %}
+      {{title}} {% else %}keyDown{% endif %}</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
