@@ -2,9 +2,7 @@
 
 {% block content %}
 <style>
-    .facebook{
-        background-color: #4267B2;
-        color: white;
+    .buttons{
         border:none;
         border-radius: 10px;
         width: 350px;
@@ -14,28 +12,21 @@
         font-weight: 600;
         margin-top: 10px;
     }
+    .facebook{
+        background-color: #4267B2;
+        color: white;
+       
+    }
+    .twitter{
+        background-color: #0a84ff;
+        color: white;
+    }
     .google{
-        background-color: rgba(255, 255, 255, 0);
-        border:1px solid gray;
-        border-radius: 10px;
-        width: 350px;
-        max-width: 350px;
-        min-width: 200px;
-        height: 40px;
-        font-weight: 600;
-        margin-top: 10px;
+        background-color: #fafafa;
     }
     .apple{
         background-color: rgb(2, 2, 2);
         color: white;
-        border: none;
-        border-radius: 10px;
-        width: 350px;
-        max-width: 350px;
-        min-width: 200px;
-        height: 40px;
-        font-weight: 600;
-        margin-top: 10px;
     }
     .login-btn{
         background-color: rgba(255, 255, 255, 0);
@@ -55,22 +46,29 @@
         color: white;
         transition: 0.2s linear;
     }
+    .register-btn{
+        background-color: #0a84ff;
+        border:none;
+        color: white;
+    }
 </style>
 <div class="cont-mid rounded bg-ioswhite shadow-sm p-4" >
-            <h3>Sign to your Account</h3>
-            <div class="social-login-btns">
+            <h3>Sign in</h3>
+            <p>to your Account</p>
+        <!--<div class="social-login-btns">
             <div class="apple-login">
-                <button class="apple"><i class="fa fa-apple" aria-hidden="true"></i> Apple</button>
+                <button class="buttons apple"><i class="fa fa-apple" aria-hidden="true"></i> Sign in with Apple</button>
             </div>
             <div class="google-login">
-                <button class="google text-iosdark"><i class="fa fa-google" aria-hidden="true"></i> Google</button>
+                <button class="buttons google text-primary"><i class="fa fa-google" aria-hidden="true"></i> Sign in with Google</button>
             </div>
             <div class="facebook-login">
-                <button class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</button>
+                <button class="buttons facebook"><i class="fa fa-facebook" aria-hidden="true"></i> Sign in with Facebook</button>
             </div>
-            
-        </div>  
-        <div class="text-center my-3">OR</div>
+            <div class="twitter-login">
+                <button class="buttons twitter"><i class="fa fa-twitter" aria-hidden="true"></i> Sign in with Twitter</button>
+            </div>
+        </div> --> 
             <form action="{% url 'login-auth-view' %}" method="post" class="ios-form">
                 {% csrf_token %}
                 <div class="form-group">
@@ -80,19 +78,13 @@
                 <div class="form-group">
                     <h4>password</h4>
                     <input type="password" placeholder="Password" name="password" class="ios-control px-2 w-100" />
-                
                 </div>
                 <a href="">forgot password?</a>
                 <div class="form-group">
                     <button type="submit" class="login-btn text-iosdark">Login</button>
-
                 </div>
-            </form>
-            
-        <button class="login-btn text-iosdark">Register</button>
-      
-
-        
+            </form>          
+        <a href="/register/"><button class="buttons register-btn text-iosdark">Create New</button></a>       
     </div>
 
 

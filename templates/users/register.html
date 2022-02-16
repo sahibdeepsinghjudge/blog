@@ -1,0 +1,70 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<style>
+    .buttons{
+        border:none;
+        border-radius: 10px;
+        width: 350px;
+        max-width: 350px;
+        min-width: 200px;
+        height: 40px;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+    .login-btn{
+        background-color: rgba(255, 255, 255, 0);
+        border:1px solid gray;
+        border-radius: 10px;
+        width: 350px;
+        max-width: 350px;
+        min-width: 200px;
+        height: 40px;
+        font-weight: 600;
+        margin-top: 10px;
+        transition: 0.2s linear;
+    }
+    .login-btn:hover{
+        background-color: #0a84ff;
+        border:none;
+        color: white;
+        transition: 0.2s linear;
+    }
+    .register-btn{
+        background-color: #0a84ff;
+        border:none;
+        color: white;
+    }
+</style>
+<div class="cont-mid rounded bg-ioswhite shadow-sm p-4" >
+            <h3>Sign up</h3>
+            <p>Create New Account</p>
+            <form action="{% url 'register-auth-view' %}" method="post" class="ios-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <h4>fullname</h4>
+                    <input type="text" placeholder="Fullname" name="fullname" class="ios-control px-2 w-100" />
+                </div>
+                <div class="form-group">
+                <h4>email</h4>
+                <input type="email" placeholder="Email" name="email" class="ios-control px-2 w-100" />
+                </div>
+                <div class="form-group">
+                    <h4>set password</h4>
+                    <input type="password" placeholder="Set a password" name="s_password" class="ios-control px-2 w-100" />
+                </div>
+                <div class="form-group">
+                    <h4>confirm password</h4>
+                    <input type="password" placeholder="Confirm password" name="c_password" class="ios-control px-2 w-100" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="buttons register-btn text-iosdark">Next</button>    
+                </div>
+            </form>          
+    <div class="text-center">OR</div>
+       <a href="/login/"><button class="login-btn text-iosdark">Try Loging in</button></a>
+
+    </div>
+
+
+{% endblock content %}

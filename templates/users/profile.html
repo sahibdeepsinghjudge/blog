@@ -1,0 +1,56 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<style>
+    .profile-nav{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .profile-li{
+        max-width:120px;
+        min-width: 100px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        margin-right: 5px;
+        border-radius: 10px;
+    }
+    .active{
+        
+        color: #0a84ff;
+    }
+</style>
+
+<div class="container bg-ioswhite  p-4">
+    <div class="mb-2" style="max-height: 350px;overflow:hidden;">
+        <img src="/media/thumbnails/20210908_202411.jpg" alt="" srcset=""  style="position:relative;width:100%;">
+    </div>
+            <h3>{{user.first_name}}{{user.last_name}} <a class="text-iosred text-small py-2"> Subscribe</a></h3>            
+            <span class="text-iosgray text-small">{{user.username}} </span>
+            <br>
+
+            <ol class="profile-nav">
+                <li class="profile-li  p-2 active">About</li>
+                <li class="profile-li  p-2 ">Blogs</li>
+            </ol>
+            <hr class="hr-light w-75">
+            <div class="breif text-small w-75">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde, voluptatibus asperiores sequi veniam officiis commodi iure.
+                Ad quia, vitae ea similique perspiciatis ipsum amet itaque quas enim, quis quae laboriosam.
+            </div>
+            <hr class="hr-light w-75">
+            <div class="user-details text-small">
+                
+                <p>Joined <b>keDown</b> on {{user.date_joined|date:"M d, Y" }}</p>
+            </div>
+            <hr class="hr-light">
+            <p>74.5k Subscribers</p>
+            <ol>
+                <li>accounts list</li>
+            </ol>
+        
+   
+    
+</div>
+{% endblock content %}

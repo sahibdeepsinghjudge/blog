@@ -6,11 +6,12 @@
     </label>
   <ul class="menu">
     <li><a class="home text-iosdark" href="/">Home</a></li>
-    {% if request.user.is_staff %}
+    {% if request.user.is_authenticated %}
     <li><a class="services text-iosdark" href="">Dashboard</a></li>
-    <li><a class="logout text-iosdark" href="">{{request.user.username}}</a></li>
+    <li><a class="text-iosdark" href="users/profile/{{request.user.username}}">{{request.user.first_name}}</a></li>
     {% else %}
     <li><a class="login text-iosdark"  href="/login/">Login</a></li>
+    <li><a class="login text-iosdark"  href="/register/">Register</a></li>
     {% endif %}
   </ul>
 </nav>
