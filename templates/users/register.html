@@ -37,7 +37,7 @@
     }
 </style>
 <div class="cont-mid rounded bg-ioswhite shadow-sm p-4" >
-            <h3>Sign up</h3>
+            <h3><b>keyDown</b></h3>
             <p>Create New Account</p>
             <form action="{% url 'register-auth-view' %}" method="post" class="ios-form">
                 {% csrf_token %}
@@ -60,7 +60,8 @@
                 <div class="form-group">
                     <button type="submit" class="buttons register-btn text-iosdark">Next</button>    
                 </div>
-            </form>          
+            </form>  
+            <hr>
     <div class="text-center">OR</div>
        <a href="/login/"><button class="login-btn text-iosdark">Try Loging in</button></a>
 

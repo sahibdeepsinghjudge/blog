@@ -35,20 +35,20 @@ $( function() {
   });
 } );
 
-  $(document).ready(function(){
-    // Add smooth scrolling to all links
+$(document).ready(function(){
+  setTimeout(function(){
     var dt = new Date();
     var hrs = dt.getHours();
     var mins = dt.getMinutes();
     var secs = dt.getSeconds();
-
-
-if(hrs>17){
-   dark()
-}else if (hrs<8){
-  dark()
-}else{
-  return true
-}
-  });
+    if(hrs>17){
+      dark()
+    }else if (hrs<8){
+      dark()
+    }else{
+      return true
+    }
+  },2500)
+  
+});
     

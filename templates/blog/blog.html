@@ -7,11 +7,11 @@
         {% if blog %}
         {% for blog in blog %}
         <div class="creator-details">
-          <div class="creator-name">
+          <div class="creator-name" >
             <span class="material-icons text-iosgray mr-2" >
               account_circle
             </span>
-            {{blog.blog_creator}}
+            {{blog.blog_creator.first_name}} {{blog.blog_creator.last_name}}
           </div>
           <div class="blog-info-det">
             

@@ -12,7 +12,8 @@ def user_home(request):
     return HttpResponse(request.user)
 
 def login_page(request):
-    logout(request)
+    if request.user:
+        logout(request)
     context = {
         'title':"Login"
     }
@@ -76,6 +77,9 @@ def login_view(request):
         
     return render(request,'users/login.html')
 
+def logout_view(request):
+    logout(request)
+    return redirect('/login/')
 
 def profile(request,username):
     try:

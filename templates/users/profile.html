@@ -26,31 +26,82 @@
     <div class="mb-2" style="max-height: 350px;overflow:hidden;">
         <img src="/media/thumbnails/20210908_202411.jpg" alt="" srcset=""  style="position:relative;width:100%;">
     </div>
-            <h3>{{user.first_name}}{{user.last_name}} <a class="text-iosred text-small py-2"> Subscribe</a></h3>            
+            <h3>{{user.first_name}}{{user.last_name}} </h3>            
             <span class="text-iosgray text-small">{{user.username}} </span>
             <br>
-
-            <ol class="profile-nav">
-                <li class="profile-li  p-2 active">About</li>
-                <li class="profile-li  p-2 ">Blogs</li>
+            <a class="text-iosred text-small py-2">Subscribe 74.5k</a>
+            
+            <ol>
+                <li>social media accounts list</li>
             </ol>
-            <hr class="hr-light w-75">
-            <div class="breif text-small w-75">
+           
+            <div class="breif text-small">
+                <h2>About</h2>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde, voluptatibus asperiores sequi veniam officiis commodi iure.
                 Ad quia, vitae ea similique perspiciatis ipsum amet itaque quas enim, quis quae laboriosam.
             </div>
-            <hr class="hr-light w-75">
-            <div class="user-details text-small">
-                
+            <div class="user-details mt-2 text-small">
                 <p>Joined <b>keDown</b> on {{user.date_joined|date:"M d, Y" }}</p>
             </div>
-            <hr class="hr-light">
-            <p>74.5k Subscribers</p>
-            <ol>
-                <li>accounts list</li>
-            </ol>
-        
+            <h2>Blogs</h2>
+            <div class="my-blogs blog-data">
+                
+            </div>
+            {% if request.user.username == user.username  %}
+            <div class="container text-center rounded">
+                
+                <button class="btnios ios-pr">Create blog</button>
+            </div>
+            <span class=""><a href="/logout/">Logout</a></span>
+            {% endif %}
+            
+        <input type="hidden" value="{{user.username}}" class="username-input"/>
    
     
 </div>
+<script>
+    var blog_count = 0;
+function getBlogs(){
+        const username = $(".username-input").val()
+        $.get("/blogs/"+username,function(data){
+            if(data['blogs'].length>0){
+                for(var i =0; i<data['blogs'].length;i++){
+               
+                    var item = `
+                    <div class="blog-info-det-main bg-ioswhite p-2 rounded-lg">
+                        <a href="/blog/${data['blogs'][i].slug}/" class="text-iosdark">
+                        <div class="flex-box ">
+                            <h2 class="text-iosgray mr-2">${i+1}</h2>
+                            <div>
+                            <span class="tags-${i+1} tags">
+                                <input type="hidden" value="${data['blogs'][i].tags}" class="tags-holder-${i+1}"/>
+                            </span>
+                        <div>
+                        <span class="mt-1 title-blog blog-text text-iosdark">${data['blogs'][i].title}</span>
+                    </div>
+                    
+                        <span class="text-iosgray">${data['blogs'][i].date}</span> 
+                    </div> 
+                    </div>
+                </a>
+                <div>
+                    </div>
+                    </div>
+                    
+                    `
+                $('.my-blogs').append(item)
+                item = ``
+                blog_count++;
+                }
+            }
+            else{
+                item = `<div class="container text-center rounded">
+                    <h4 class="text-iosgray">No Blogs,Stories,Drafts</h4>
+                </div>`
+                $('.my-blogs').append(item)
+            }
+        })
+    }
+getBlogs()
+</script>
 {% endblock content %}
