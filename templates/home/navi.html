@@ -7,7 +7,7 @@
   <ul class="menu">
     <li><a class="home text-iosdark" href="/">Home</a></li>
     {% if request.user.is_authenticated %}
-    <li><a class="services text-iosdark" href="">Dashboard</a></li>
+    <li><a class="text-iosprimary" href="{% url 'create-blog-one' %}">Create</a></li>
     <li><a class="text-iosdark" href="/users/profile/{{request.user.username}}">{{request.user.first_name}}</a></li>
     {% else %}
     <li><a class="login text-iosdark"  href="/login/">Login</a></li>
