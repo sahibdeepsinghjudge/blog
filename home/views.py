@@ -1,9 +1,11 @@
 from django.core.checks import messages
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from .models import blog, blog_Details
 from django.contrib import messages
 from django.views.generic.list import ListView
 from .forms import blogForm
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from random import randint
@@ -131,3 +133,17 @@ def home_view(request):
     }
     
     return render(request,'home/index.html',context)
+
+def user_blog(request,username):
+    try:
+        user_obj = User.objects.get(username=username)
+        blogs = blog_Details.objects.filter(blog_creator = user_obj.id).order_by('-blog_clicks')
+        blogs_list = []
+        for i in blogs:
+            blogs_list.append({'title':i.blog_title,'tags':i.tags,'date':i.date,'clicks':i.blog_clicks,'slug':i.slug})
+        data = {
+            'blogs':blogs_list,
+        }
+        return JsonResponse(data)
+    except User.DoesNotExist:
+        return redirect('/')
