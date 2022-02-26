@@ -16,8 +16,7 @@
         margin-right: 5px;
         border-radius: 10px;
     }
-    .active{
-        
+    .active{    
         color: #0a84ff;
     }
 </style>
@@ -50,7 +49,7 @@
             {% if request.user.username == user.username  %}
             <div class="container text-center rounded">
                 
-                <button class="btnios ios-pr">Create blog</button>
+                <a href="{% url 'create-blog-one' %}"><button class="btnios ios-pr">Create blog</button></a>
             </div>
             <span class=""><a href="/logout/">Logout</a></span>
             {% endif %}

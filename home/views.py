@@ -147,3 +147,7 @@ def user_blog(request,username):
         return JsonResponse(data)
     except User.DoesNotExist:
         return redirect('/')
+
+@login_required
+def create_blog(request):
+    return render(request,"blog/createblog_first.html")

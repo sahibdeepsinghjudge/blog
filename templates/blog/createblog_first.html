@@ -1,0 +1,75 @@
+{% extends 'home/base.html' %}
+ 
+{% block content %}
+
+<div class="container bg-ioswhite mt-3 p-2 rounded-lg">
+    <h2 class="text-iosdark font-weight-bold">
+        Create
+    </h2>
+    <p><span>Stories,Researches,Blogs and News</span> on <b>keyDown</b> </p>
+    <div class="display-flex">
+        <h4 class="text-iosprimary font-weight-bold">Post details</h4>
+    </div>
+    <form action="" method="post">
+        <div class="form-group">
+            <label for="blog_title">
+                <h4>Title</h4>
+            </label>
+            <input type="text" name="blog_title" id="blog_title" class="form-control px-2" placeholder="Give a title to your creation (50 words)">
+            
+        </div>
+        <div class="form-group">
+            <label for="blog_tags">
+                <h4>Tags</h4>
+            </label>
+            <input type="text"  name="blog_tags" id="blog_tags" class="form-control px-2" placeholder="tag1,tag2,tag3">
+            <span class="form-text">Enter tags seprated by comma(,).Eg: tag1,tag2,tag3</span>
+            <div class="tags"></div>
+        </div>
+        <div class="form-group">
+            <label for="blog_breif">
+                <h4>About Post</h4>
+            </label>
+            <textarea  name="blog_breif" id="blog_breif" class="form-control px-2" rows="10" cols="50" placeholder="Write in about 120 words."></textarea>
+            <span class="form-text">Enter tags seprated by comma(,).Eg: tag1,tag2,tag3</span>
+        </div> 
+        <div class="form-group">
+            <label for="blog_thumbnail">
+                <h4>Thumbnail:</h4>
+            </label>
+            <input type="link" name="blog_thumbnail_url" class="form-control" id="blog_thumbnail_url"  placeholder="Paste url of thumbnail">
+            <div class="text-center my-2 font-weight-bold">OR</div>
+            <input type="file" name="blog_thumbnail" id="blog_thumbnail"  placeholder="">
+        </div>
+        <span class="blog_slug"></span>
+        <div class="form-group">
+            <button class="btnios ios-sp">Continue to editor</button>
+        </div>
+    </form>
+</div>
+<script>
+
+    $(document).ready(function(){
+        $("#blog_tags").focusout(function(){
+            function addTags(){
+                    var tags_holder = $("#blog_tags").val();
+                    console.log(tags_holder)
+                    var tag_Arr = tags_holder.split(',')
+                    for(i in tag_Arr){
+                        var tag = `<div class="tag bg-ioslight text-iosprimary">
+                                    ${tag_Arr[i]}
+                                    </div>`
+                                    $(".tags").append(tag)
+                                }  
+            }
+            addTags()
+        })
+        $("#blog_tags").focusin(function(){
+            $('.tags').html('')
+        })
+      
+    })
+    
+    
+</script>
+{% endblock content %}
