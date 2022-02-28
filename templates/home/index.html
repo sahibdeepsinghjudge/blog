@@ -58,7 +58,7 @@
                     <div class="flex-box ">
                         <h2 class="text-iosgray mr-2">{{ forloop.counter }}</h2>
                         <div>
-                        <span class="text-small text-iosgray">{{blog.blog_creator}}</span>
+                        <span class="text-small text-iosgray">{{blog.blog_creator.first_name}}</span>
                         <span class="tags-{{ forloop.counter }} tags">
                             <input type="hidden" value="{{blog.tags}}" class="tags-holder-{{ forloop.counter }}"/>
                             <div class="tag bg-ioslight text-iosred">#trending</div>
