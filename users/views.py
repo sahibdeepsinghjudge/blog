@@ -72,7 +72,7 @@ def login_view(request):
             else:
                 messages.warning(request,"Username or  password invalid!")
         except User.DoesNotExist:
-            messages.danger(request,"Email you entered doesn't exist!")
+            messages.warning(request,"Email you entered doesn't exist!")
             return redirect('/login/')
         
     return render(request,'users/login.html')

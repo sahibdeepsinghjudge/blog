@@ -1,3 +1,4 @@
+from dataclasses import fields
 from email.policy import default
 from pyexpat import model
 from django.db import models
@@ -21,16 +22,32 @@ class blog_Details(models.Model):
     blog_clicks = models.IntegerField(default=0)
     tags = models.TextField(blank=True)
     link_chain = models.TextField(blank=True)
+    def __str__(self):
+        return self.blog_title
+    class Meta:
+        ordering = ["-blog_clicks"]
+
+        
     def save(self,*args, **kwargs):
             word = ''
             abc = list(string.ascii_lowercase)
+            Abc = list(string.ascii_uppercase)
             if not self.slug:
-                blog_t = self.blog_title[:50]
-                slug = slugify(blog_t)
-                self.slug = slug
-                while len(word) <= len(self.blog_creator.username):
-                    word+=random.choice(abc)
-                self.link_chain=word
+                def slugify_blog():
+                    word = ''
+                    blog_t = self.blog_title[:50]
+                    slug = slugify(blog_t)
+                    self.slug = slug
+                    while len(word) <= len(self.blog_creator.username):
+                        word+=random.choice(abc)
+                        word+=random.choice(Abc)
+                    if word in blog_Details.objects.all().only("link_chain"):
+                        return slugify_blog()
+                    else:
+                        return word
+                word = slugify_blog()
+                self.slug+='-'+word 
+                self.link_chain=word 
             super().save(*args, **kwargs)
 
 
@@ -48,4 +65,8 @@ class blog(models.Model):
             super().save(*args, **kwargs)
     
     
-   
+class tags(models.Model):
+    tag_text = models.CharField(max_length=50,blank=False)
+    tag_uses = models.IntegerField(default=1)
+    def __str__(self):
+        return self.blog_id.tag_text

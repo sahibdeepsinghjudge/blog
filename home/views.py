@@ -1,5 +1,6 @@
+from turtle import title
 from django.core.checks import messages
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 from .models import blog, blog_Details
 from django.contrib import messages
@@ -27,7 +28,15 @@ def blog_details(request,slug):
     if blogd:
         blog_object=blog_Details.objects.get(slug=slug)
         blogs=blog_Details.objects.all().order_by('-blog_clicks')[0:6]
-        blog_content = blog.objects.get(blog_id = blog_object.id)
+        try:
+            blog_content = blog.objects.get(blog_id = blog_object.id)
+        except:
+            if request.user == blog_object.blog_creator:
+
+                return redirect('/'+slug+'/update/')
+            else:
+                messages.warning(request,"Requested source is incomplete.")
+                return redirect('/')
         blog_object.blog_clicks=blog_object.blog_clicks+1
         blog_object.save()
         if blog_object in blogs:
@@ -62,7 +71,7 @@ def create_blog(request):
 class AddBlogView(ListView,LoginRequiredMixin):
     model = blog
     def get(self, request):
-        if request.user.is_superuser:
+        if request.user.is_authenticated:
             form = blogForm()
             return render(request, 'blog/createblog.html', {'form':form,'name':'Create Blog'})
         else:
@@ -78,7 +87,7 @@ class AddBlogView(ListView,LoginRequiredMixin):
             add_post.save()
             form = blogForm()
             messages.success(request,'Blog created')
-            return redirect('/dashboard/')
+            return redirect('/users/profile/'+request.user.username)
         else:
             messages.error(request,"Process failed due to internal server error.")
             return redirect('/')
@@ -90,16 +99,25 @@ def update_view(request, slug):
   
     # fetch the object related to passed id
     blog_det = blog_Details.objects.get(slug=slug)
-    obj = blog.objects.get(blog_id = blog_det.id)
+    def retrunBlog():
+        try:
+            obj = blog.objects.get(blog_id = blog_det.id)
+            return obj
+        except:
+            blog_ob = blog.objects.create(blog_id = blog_det,blog_content = '')
+            blog_ob.save()
+            retrunBlog()
+        
+        
     # pass the object as instance in form
-    form = blogForm(request.POST or None, instance = obj)
+    form = blogForm(request.POST or None, instance = retrunBlog())
   
     # save the data from the form and
     # redirect to detail_view
     if form.is_valid():
         form.save()
         messages.success(request,'Blog post updated')
-        return redirect("/"+slug+'/')
+        return redirect("/blog/"+slug+'/')
        
     # add form dictionary to context
     context["form"] = form
@@ -110,9 +128,7 @@ def update_view(request, slug):
 def blog_delete_view(request,slug):
     if request.user.is_superuser:
         blog_det_obj = blog_Details.objects.get(slug=slug)
-        blog_cont = blog.objects.get(blog_id = blog_det_obj.id)
         blog_det_obj.delete()
-        blog_cont.delete()
         messages.success(request,"Your blog has been deleted!")
         return redirect('/')
     else:
@@ -151,3 +167,18 @@ def user_blog(request,username):
 @login_required
 def create_blog(request):
     return render(request,"blog/createblog_first.html")
+
+@login_required
+def addBlogDetails(request):
+    if request.method=='POST':
+        title = request.POST.get('blog_title')
+        tags = request.POST.get('blog_tags')
+        about = request.POST.get('blog_breif')
+        thumbnail = request.POST.get('blog_thumbnail_url')
+        blog_obj = blog_Details.objects.create(blog_title = title,blog_thumbnail_url=thumbnail,blog_brief=about,tags = tags,blog_creator = request.user)
+        blog_obj.save()
+        messages.success(request,"Details added")
+        return redirect('/'+blog_obj.slug+'/update/')
+    else:
+        messages.warning(request,"POST method not found!")
+    return redirect('/')
